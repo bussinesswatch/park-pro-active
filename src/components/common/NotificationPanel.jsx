@@ -40,7 +40,7 @@ const NotificationPanel = () => {
   if (!isSupported) return null;
 
   return (
-    <div className="relative" ref={panelRef}>
+    <div className="relative z-[100]" ref={panelRef}>
       {/* Bell Icon with Badge */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -56,7 +56,7 @@ const NotificationPanel = () => {
 
       {/* Notification Panel */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 md:w-96 bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl border border-white/30 z-50">
+        <div className="absolute right-0 mt-2 w-80 md:w-96 bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl border border-white/30 z-[100]" style={{ isolation: 'isolate' }}>
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-white/30">
             <h3 className="font-semibold text-gray-900">Notifications</h3>
