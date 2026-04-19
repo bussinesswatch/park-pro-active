@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
+import oilChangeData from '../../../public/oil_change_tracker.json';
 
 const statusToBadge = (status) => {
   const s = (status || '').toLowerCase();
@@ -12,39 +13,11 @@ const statusToBadge = (status) => {
 const numOrDash = (v) => (v === null || v === undefined || Number.isNaN(v) ? '-' : v);
 
 const OilChangeTracker = () => {
-  const [records, setRecords] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
-  useEffect(() => {
-    let cancelled = false;
-
-    const load = async () => {
-      try {
-        setLoading(true);
-        setError('');
-
-        const res = await fetch('/oil_change_tracker.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error(`Failed to load oil_change_tracker.json (${res.status})`);
-
-        const json = await res.json();
-        const list = Array.isArray(json?.oil_change_records) ? json.oil_change_records : [];
-
-        if (!cancelled) setRecords(list);
-      } catch (e) {
-        if (!cancelled) setError(e?.message || 'Failed to load oil change data');
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    };
-
-    load();
-
-    return () => {
-      cancelled = true;
-    };
+  const records = useMemo(() => {
+    return Array.isArray(oilChangeData?.oil_change_records) ? oilChangeData.oil_change_records : [];
   }, []);
 
   const uniqueStatuses = useMemo(() => {
@@ -131,11 +104,7 @@ const OilChangeTracker = () => {
       </div>
 
       <div className="card overflow-hidden">
-        {loading ? (
-          <div className="py-10 text-center text-gray-500">Loading...</div>
-        ) : error ? (
-          <div className="py-10 text-center text-red-600">{error}</div>
-        ) : filtered.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="py-10 text-center text-gray-500">No records found.</div>
         ) : (
           <div className="overflow-x-auto">

@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Search, Wrench, Clock, CheckCircle, AlertCircle } from 'lucide-react';
+import maintenanceQueueData from '../../../public/maintenance_queue.json';
+import maintenanceHistoryData from '../../../public/maintenance_history.json';
 
 const statusToBadge = (status) => {
   const s = (status || '').toLowerCase();
@@ -18,52 +20,16 @@ const priorityBadge = (p) => {
 };
 
 const MaintenanceTracker = () => {
-  const [activeTab, setActiveTab] = useState('queue'); // 'queue' | 'history'
-  const [queue, setQueue] = useState([]);
-  const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('queue');
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
-  useEffect(() => {
-    let cancelled = false;
+  const queue = useMemo(() => {
+    return Array.isArray(maintenanceQueueData?.maintenance_queue) ? maintenanceQueueData.maintenance_queue : [];
+  }, []);
 
-    const load = async () => {
-      try {
-        setLoading(true);
-        setError('');
-
-        const [qRes, hRes] = await Promise.all([
-          fetch('/maintenance_queue.json', { cache: 'no-store' }),
-          fetch('/maintenance_history.json', { cache: 'no-store' }),
-        ]);
-
-        if (!qRes.ok) throw new Error(`Failed to load maintenance_queue.json (${qRes.status})`);
-        if (!hRes.ok) throw new Error(`Failed to load maintenance_history.json (${hRes.status})`);
-
-        const qJson = await qRes.json();
-        const hJson = await hRes.json();
-
-        const qList = Array.isArray(qJson?.maintenance_queue) ? qJson.maintenance_queue : [];
-        const hList = Array.isArray(hJson?.maintenance_logs) ? hJson.maintenance_logs : [];
-
-        if (!cancelled) {
-          setQueue(qList);
-          setHistory(hList);
-        }
-      } catch (e) {
-        if (!cancelled) setError(e?.message || 'Failed to load maintenance data');
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    };
-
-    load();
-
-    return () => {
-      cancelled = true;
-    };
+  const history = useMemo(() => {
+    return Array.isArray(maintenanceHistoryData?.maintenance_logs) ? maintenanceHistoryData.maintenance_logs : [];
   }, []);
 
   const data = activeTab === 'queue' ? queue : history;
@@ -189,11 +155,7 @@ const MaintenanceTracker = () => {
 
       {/* Table */}
       <div className="card overflow-hidden">
-        {loading ? (
-          <div className="py-10 text-center text-gray-500">Loading...</div>
-        ) : error ? (
-          <div className="py-10 text-center text-red-600">{error}</div>
-        ) : filtered.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="py-10 text-center text-gray-500">
             No {activeTab} records found.
           </div>
