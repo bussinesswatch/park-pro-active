@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
-import oilChangeData from '../../../public/oil_change_tracker.json';
+import oilChangeData from '../data/oil_change_tracker.json';
 
 const statusToBadge = (status) => {
   const s = (status || '').toLowerCase();

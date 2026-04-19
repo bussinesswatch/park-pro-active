@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Search, Wrench, Clock, CheckCircle, AlertCircle } from 'lucide-react';
-import maintenanceQueueData from '../../../public/maintenance_queue.json';
-import maintenanceHistoryData from '../../../public/maintenance_history.json';
+import maintenanceQueueData from '../data/maintenance_queue.json';
+import maintenanceHistoryData from '../data/maintenance_history.json';
 
 const statusToBadge = (status) => {
   const s = (status || '').toLowerCase();
