@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useCollection } from '../hooks/useFirestore';
 import { ASSET_CATEGORIES, getStatusBadgeClass, formatDate } from '../utils/helpers';
 import {
@@ -36,6 +37,7 @@ const iconMap = { Zap, Wind, Droplets, Car, Ship, Snowflake, Cog, Gauge, Package
 const COLORS = ['#10b981', '#ef4444', '#f59e0b'];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { data: assets } = useCollection('assets', { realTime: true });
   const { data: alerts } = useCollection('alerts', { realTime: true, where: { field: 'read', operator: '==', value: false } });
   const { data: maintenanceLogs } = useCollection('maintenance_logs', { realTime: true, orderBy: { field: 'date', direction: 'desc' } });
@@ -73,10 +75,13 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Stats Cards - Glassmorphism style */}
+      {/* Stats Cards - Glassmorphism style - All Clickable */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {/* Total Assets - Glass with pink tint */}
-        <div className="bg-gradient-to-br from-rose-500/30 to-orange-500/30 border border-white/50 shadow-xl rounded-3xl p-5" style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
+        {/* Total Assets - Clickable */}
+        <div 
+          onClick={() => navigate('/assets/all')}
+          className="cursor-pointer hover:scale-105 transition-transform bg-gradient-to-br from-rose-500/30 to-orange-500/30 border border-white/50 shadow-xl rounded-3xl p-5" 
+          style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-navy-700 text-sm font-medium">Total Assets</span>
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary-400 to-coral-400 flex items-center justify-center shadow-lg">
@@ -89,8 +94,11 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Operational - Glass with green tint */}
-        <div className="bg-gradient-to-br from-emerald-500/30 to-teal-500/30 border border-white/50 shadow-xl rounded-3xl p-5" style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
+        {/* Operational - Clickable */}
+        <div 
+          onClick={() => navigate('/assets/all')}
+          className="cursor-pointer hover:scale-105 transition-transform bg-gradient-to-br from-emerald-500/30 to-teal-500/30 border border-white/50 shadow-xl rounded-3xl p-5" 
+          style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-navy-700 text-sm font-medium">Operational</span>
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg">
@@ -106,8 +114,11 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Non-Operational - Glass with rose tint */}
-        <div className="bg-gradient-to-br from-rose-500/30 to-pink-500/30 border border-white/50 shadow-xl rounded-3xl p-5" style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
+        {/* Non-Operational - Clickable */}
+        <div 
+          onClick={() => navigate('/assets/all')}
+          className="cursor-pointer hover:scale-105 transition-transform bg-gradient-to-br from-rose-500/30 to-pink-500/30 border border-white/50 shadow-xl rounded-3xl p-5" 
+          style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-navy-700 text-sm font-medium">Non-Operational</span>
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center shadow-lg">
@@ -123,8 +134,11 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Under Repair - Glass with amber tint */}
-        <div className="bg-gradient-to-br from-amber-500/30 to-orange-500/30 border border-white/50 shadow-xl rounded-3xl p-5" style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
+        {/* Under Repair - Clickable */}
+        <div 
+          onClick={() => navigate('/maintenance-tracker')}
+          className="cursor-pointer hover:scale-105 transition-transform bg-gradient-to-br from-amber-500/30 to-orange-500/30 border border-white/50 shadow-xl rounded-3xl p-5" 
+          style={{backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', backgroundColor: 'rgba(255, 255, 255, 0.6)'}}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-navy-700 text-sm font-medium">Under Repair</span>
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">

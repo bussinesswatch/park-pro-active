@@ -12,11 +12,9 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const preConfiguredUsers = useMemo(
-    () => [
-      { name: 'Admin 1', email: 'admin1@parkpro.com', password: 'ParkPro2024!', role: 'admin' },
-      { name: 'User 1', email: 'user1@parkpro.com', password: 'ParkPro2024!', role: 'user' }
-    ],
+  // Admin user configuration
+  const adminUser = useMemo(
+    () => ({ name: 'Admin', email: 'absy@parkpro.com', role: 'admin' }),
     []
   );
 
@@ -43,8 +41,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isAdmin = () => {
-    const email = user?.email || '';
-    return email.toLowerCase().startsWith('admin');
+    return user?.email?.toLowerCase() === 'absy@parkpro.com';
   };
 
   const value = {
@@ -53,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     isAdmin,
-    preConfiguredUsers
+    adminUser
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
