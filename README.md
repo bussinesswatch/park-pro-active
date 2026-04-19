@@ -14,7 +14,10 @@ Engineering Operations Management System for managing assets, maintenance, fuel 
 - **Inventory System**: Spare parts and materials management with low-stock alerts
 - **Dashboard & Analytics**: Charts and reports for asset status, fuel usage, maintenance trends
 - **Alert System**: Notifications for maintenance due, low fuel, and abnormal readings
-- **Multi-user Support**: 10 pre-configured users with role-based access (Admin/User)
+- **Multi-user Support**: Role-based access control - Admin can create/manage users
+- **Clickable Stats Cards**: Dashboard stats navigate to related pages (Assets, Maintenance Tracker)
+- **Oil Change Tracker**: Dedicated page for vessel oil change monitoring
+- **Maintenance Tracker**: Queue and history tracking for maintenance operations
 - **Mobile Responsive**: Works on desktop, tablet, and mobile devices
 
 ## Tech Stack
@@ -25,20 +28,13 @@ Engineering Operations Management System for managing assets, maintenance, fuel 
 - **Icons**: Lucide React
 - **Mobile**: React Native (Expo) - separate app
 
-## Pre-configured Users
+## Default Admin Account
 
-| Email | Password | Role | Name |
-|-------|----------|------|------|
-| admin1@parkpro.com | ParkPro2024! | admin | Admin One |
-| admin2@parkpro.com | ParkPro2024! | admin | Admin Two |
-| user1@parkpro.com | ParkPro2024! | user | User One |
-| user2@parkpro.com | ParkPro2024! | user | User Two |
-| manager1@parkpro.com | ParkPro2024! | admin | Manager One |
-| manager2@parkpro.com | ParkPro2024! | admin | Manager Two |
-| tech1@parkpro.com | ParkPro2024! | user | Technician One |
-| tech2@parkpro.com | ParkPro2024! | user | Technician Two |
-| ops1@parkpro.com | ParkPro2024! | user | Operations One |
-| ops2@parkpro.com | ParkPro2024! | user | Operations Two |
+| Email | Password | Role |
+|-------|----------|------|
+| absy@parkpro.com | Absy@123 | Administrator |
+
+**Note:** Admin can create additional users from the Users page after logging in.
 
 ## Setup Instructions
 
@@ -74,8 +70,13 @@ npm run dev
 The app will be available at `http://localhost:3000`
 
 **Default Login:**
-- Email: `admin1@parkpro.com`
-- Password: `ParkPro2024!`
+- Email: `absy@parkpro.com`
+- Password: `Absy@123`
+
+**Features:**
+- Click on dashboard stats cards to navigate to detailed views
+- Oil Change Tracker page for monitoring vessel maintenance schedules
+- Maintenance Tracker with queue and history views
 
 ### 3. Firebase Firestore Rules
 
@@ -139,6 +140,10 @@ park-pro-active/
 ## Mobile App
 
 The mobile app is built with React Native (Expo). See the `mobile` folder for the mobile application.
+
+## Developed By
+
+**Retts Web Dev** - Powered by Business Watch PVT LTD
 
 ## License
 

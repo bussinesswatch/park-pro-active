@@ -1,29 +1,36 @@
 # Setup Firebase Authentication Users
 
-## Issue: 400 Error on Login
+## Issue: Error (auth/invalid-credential) on Login
 
-The console shows a 400 error because the pre-configured users don't exist in Firebase Authentication yet.
+This error occurs when the admin user doesn't exist in Firebase Authentication yet.
 
-## Solution: Create Users in Firebase Console
+## Solution: Create Admin User in Firebase Console
 
-### Option 1: Manual Creation (Quick)
+### Step 1: Create the Default Admin User (REQUIRED)
 
 1. Go to https://console.firebase.google.com/project/park-pro-active/authentication/users
 2. Click "Add user"
-3. Add each of the 10 users:
+3. Create the admin user:
 
 | Email | Password |
 |-------|----------|
-| admin1@parkpro.com | ParkPro2024! |
-| admin2@parkpro.com | ParkPro2024! |
-| manager1@parkpro.com | ParkPro2024! |
-| manager2@parkpro.com | ParkPro2024! |
-| user1@parkpro.com | ParkPro2024! |
-| user2@parkpro.com | ParkPro2024! |
-| tech1@parkpro.com | ParkPro2024! |
-| tech2@parkpro.com | ParkPro2024! |
-| ops1@parkpro.com | ParkPro2024! |
-| ops2@parkpro.com | ParkPro2024! |
+| absy@parkpro.com | Absy@123 |
+
+4. Click **Add user**
+
+### Step 2: Verify Login
+
+After creating the admin user:
+1. Return to the app login page
+2. Enter: `absy@parkpro.com` / `Absy@123`
+3. Click "Sign In" - you should now be logged in successfully
+
+### Step 3: Create Additional Users (Optional)
+
+Once logged in as admin:
+1. Navigate to the **Users** page from the sidebar
+2. Click **"Add User"** to create additional user accounts
+3. The admin can create as many users as needed with appropriate roles
 
 ### Option 2: Automatic Script
 

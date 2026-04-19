@@ -14,6 +14,10 @@
       "destination": "/manifest.json"
     },
     {
+      "source": "/logo.png",
+      "destination": "/logo.png"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
@@ -29,6 +33,15 @@
         {
           "key": "Service-Worker-Allowed",
           "value": "/"
+        }
+      ]
+    },
+    {
+      "source": "/manifest.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
         }
       ]
     }

@@ -37,39 +37,40 @@ The Park Pro-Active app can be installed as a Progressive Web App (PWA):
 
 ## Login
 
-### Pre-configured Users
-The system includes 10 pre-configured user accounts:
+### Default Admin Account
+The system has one default administrator account:
 
 | Email | Password | Role |
 |-------|----------|------|
-| admin1@parkpro.com | ParkPro2024! | Administrator |
-| admin2@parkpro.com | ParkPro2024! | Administrator |
-| manager1@parkpro.com | ParkPro2024! | Administrator |
-| manager2@parkpro.com | ParkPro2024! | Administrator |
-| user1@parkpro.com | ParkPro2024! | User |
-| user2@parkpro.com | ParkPro2024! | User |
-| tech1@parkpro.com | ParkPro2024! | User |
-| tech2@parkpro.com | ParkPro2024! | User |
-| ops1@parkpro.com | ParkPro2024! | User |
-| ops2@parkpro.com | ParkPro2024! | User |
+| absy@parkpro.com | Absy@123 | Administrator |
 
 ### Login Steps
 1. Open the app URL
-2. Enter email address
-3. Enter password: `ParkPro2024!`
+2. Enter email: `absy@parkpro.com`
+3. Enter password: `Absy@123`
 4. Click "Sign In"
+
+### Creating Additional Users
+After logging in as admin:
+1. Navigate to the **Users** page from the sidebar
+2. Click **"Add User"**
+3. Fill in user details (email, name, role)
+4. Set temporary password
+5. The new user can then log in with their credentials
 
 ---
 
 ## Dashboard
 
 ### Overview
-The dashboard provides a quick overview of your engineering operations:
+The dashboard provides a quick overview of your engineering operations with **clickable stats cards**:
 
-- **Total Assets**: Count of all assets in the system
-- **Operational**: Assets currently working
-- **Non-Operational**: Assets out of service
-- **Under Repair**: Assets in maintenance
+- **Total Assets**: Count of all assets in the system → Click to view all assets
+- **Operational**: Assets currently working → Click to view operational assets
+- **Non-Operational**: Assets out of service → Click to view non-operational assets
+- **Under Repair**: Assets in maintenance → Click to open Maintenance Tracker
+
+**Tip:** Click on any stats card to navigate to the detailed view of that category.
 
 ### Charts
 - **Asset Status Distribution**: Pie chart showing status breakdown
